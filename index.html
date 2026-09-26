@@ -901,7 +901,33 @@ async function saveProfile() {
       "❌ Errore durante il salvataggio.";
 
     return;
+  }/* Registra il peso nello storico */
+
+if (pesoAttuale) {
+
+  const oggi = new Date()
+    .toISOString()
+    .split("T")[0];
+
+  const { error: weightError } = await db
+  .from("weight_entries")
+  .upsert(
+    {
+      user_id: user.id,
+      peso_kg: Number(pesoAttuale),
+      data: oggi
+    },
+    {
+      onConflict: "user_id,data"
+    }
+  );
+  if (weightError) {
+    console.error(
+      "Errore salvataggio storico peso:",
+      weightError
+    );
   }
+}
 
 
   message.textContent =
