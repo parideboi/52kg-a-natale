@@ -229,12 +229,47 @@ nav button {
     </div>
 
     <div class="card">
-      <div class="muted">Peso attuale</div>
-      <div class="big" id="homeWeight">— kg</div>
-      <p class="muted">
-        Completeremo il tuo profilo nel prossimo passaggio.
-      </p>
-    </div>
+
+  <div class="muted">Peso attuale</div>
+  <div class="big" id="homeWeight">— kg</div>
+
+  <hr>
+
+  <div class="muted">🎯 Obiettivo</div>
+  <h2 id="homeGoal">— kg</h2>
+
+  <div class="muted">📉 Da perdere</div>
+  <h3 id="homeRemaining">— kg</h3>
+
+  <div class="muted">📅 Data obiettivo</div>
+  <h3 id="homeGoalDate">—</h3>
+
+  <div class="muted">Progresso verso l'obiettivo</div>
+
+  <div style="
+    width:100%;
+    height:14px;
+    background:#e5e7eb;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:8px;
+  ">
+    <div id="homeProgressBar" style="
+      width:0%;
+      height:100%;
+      background:#111827;
+      border-radius:20px;
+      transition:width .5s ease;
+    "></div>
+  </div>
+
+  <div id="homeProgressText"
+       class="muted"
+       style="margin-top:7px;">
+    0% completato
+  </div>
+
+</div>
 
     <div class="card">
       <h3>☁️ Sincronizzazione attiva</h3>
@@ -709,6 +744,74 @@ async function loadProfile() {
 
   document.getElementById("profileAttivita").value =
     profile.livello_attivita || "sedentario";
+ /* ============================
+   AGGIORNA HOME
+   ============================ */
+
+const pesoIniziale = Number(profile.peso_iniziale);
+const pesoAttuale = Number(
+  profile.peso_attuale || profile.peso_iniziale
+);
+const pesoObiettivo = Number(profile.peso_obiettivo);
+
+/* Peso attuale */
+if (pesoAttuale) {
+  document.getElementById("homeWeight").textContent =
+    pesoAttuale.toFixed(1) + " kg";
+}
+
+/* Peso obiettivo */
+if (pesoObiettivo) {
+  document.getElementById("homeGoal").textContent =
+    pesoObiettivo.toFixed(1) + " kg";
+}
+
+/* Kg ancora da perdere */
+if (pesoAttuale && pesoObiettivo) {
+
+  const mancanti = Math.max(
+    0,
+    pesoAttuale - pesoObiettivo
+  );
+
+  document.getElementById("homeRemaining").textContent =
+    mancanti.toFixed(1) + " kg";
+}
+
+/* Data obiettivo */
+if (profile.data_obiettivo) {
+
+  const parti = profile.data_obiettivo.split("-");
+
+  document.getElementById("homeGoalDate").textContent =
+    parti[2] + "/" + parti[1] + "/" + parti[0];
+}
+
+/* Percentuale di progresso */
+let progresso = 0;
+
+if (
+  pesoIniziale &&
+  pesoAttuale &&
+  pesoObiettivo &&
+  pesoIniziale !== pesoObiettivo
+) {
+
+  progresso =
+    ((pesoIniziale - pesoAttuale) /
+    (pesoIniziale - pesoObiettivo)) * 100;
+
+  progresso = Math.max(
+    0,
+    Math.min(100, progresso)
+  );
+}
+
+document.getElementById("homeProgressBar").style.width =
+  progresso.toFixed(1) + "%";
+
+document.getElementById("homeProgressText").textContent =
+  Math.round(progresso) + "% completato";
 }
 
 
@@ -831,6 +934,7 @@ async function saveProfile() {
 
     }
   }
+ await loadProfile();
 }
 /* ============================
    LOGOUT
