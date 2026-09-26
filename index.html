@@ -1299,6 +1299,102 @@ if (chartCanvas && typeof Chart !== "undefined") {
     }
   });
 }
+
+ /* =========================
+   ALIMENTAZIONE
+========================= */
+
+async function loadFood() {
+
+  const {
+    data: { user }
+  } = await db.auth.getUser();
+
+  if (!user) return;
+
+  const { data: profile, error } = await db
+    .from("profiles")
+    .select("*")
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  if (error) {
+    console.error("Errore caricamento alimentazione:", error);
+    return;
+  }
+
+  if (!profile) return;
+
+  const peso = Number(profile.peso_attuale || profile.peso_iniziale);
+  const altezza = Number(profile.altezza_cm);
+  const sesso = profile.sesso;
+  const nascita = profile.data_nascita;
+  const attivita = profile.livello_attivita || "sedentario";
+
+  if (!peso || !altezza || !nascita) return;
+
+  /* Calcolo età */
+  const oggi = new Date();
+  const dataNascita = new Date(nascita);
+
+  let eta = oggi.getFullYear() - dataNascita.getFullYear();
+
+  const mese = oggi.getMonth() - dataNascita.getMonth();
+
+  if (
+    mese < 0 ||
+    (mese === 0 && oggi.getDate() < dataNascita.getDate())
+  ) {
+    eta--;
+  }
+
+  /* Metabolismo basale - Mifflin-St Jeor */
+  let bmr;
+
+  if (sesso === "uomo") {
+    bmr = (10 * peso) + (6.25 * altezza) - (5 * eta) + 5;
+  } else if (sesso === "donna") {
+    bmr = (10 * peso) + (6.25 * altezza) - (5 * eta) - 161;
+  } else {
+    bmr = (10 * peso) + (6.25 * altezza) - (5 * eta) - 78;
+  }
+
+  /* Livello di attività */
+  const fattoriAttivita = {
+    sedentario: 1.2,
+    leggero: 1.375,
+    moderato: 1.55,
+    attivo: 1.725,
+    molto_attivo: 1.9
+  };
+
+  const fattore = fattoriAttivita[attivita] || 1.2;
+
+  const mantenimento = bmr * fattore;
+
+  /*
+    Deficit moderato.
+    In seguito lo renderemo personalizzabile.
+  */
+  let calorieTarget = Math.round(mantenimento - 400);
+
+  /* Limite prudenziale automatico */
+  const minimo = sesso === "uomo" ? 1500 : 1200;
+  calorieTarget = Math.max(calorieTarget, minimo);
+
+  /* Mostra obiettivo nella pagina Cibo */
+  const targetEl = document.getElementById("foodCaloriesTarget");
+
+  if (targetEl) {
+    targetEl.textContent = calorieTarget + " kcal";
+  }
+
+  const remainingEl = document.getElementById("foodCaloriesRemaining");
+
+  if (remainingEl) {
+    remainingEl.textContent = calorieTarget + " kcal";
+  }
+}
 }
 
 /* ============================
@@ -1322,6 +1418,7 @@ async function initialiseApp() {
       session.user
     );
    await loadProfile();
+   await loadFood();
   }
 }
 
@@ -1344,6 +1441,7 @@ db.auth.onAuthStateChange(
           session.user
         );
        await loadProfile();
+       await loadFood();
 
       }, 0);
     }
