@@ -146,6 +146,7 @@ nav button {
   font-weight: 600;
 }
 </style>
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -426,10 +427,10 @@ nav button {
   <div class="card">
     <h3>⚖️ Storico peso</h3>
 
-    <div
-      id="weightChart"
-      style="width:100%; height:220px; margin-top:15px;">
-    </div>
+    <canvas
+  id="weightChart"
+  style="width:100%; height:220px; margin-top:15px;">
+</canvas>
 
     <div id="weightHistory">
       <p class="muted">Caricamento storico...</p>
@@ -1179,6 +1180,70 @@ if (historyError) {
       `;
     })
     .join("");
+ /* Disegna il grafico del peso */
+const chartCanvas = document.getElementById("weightChart");
+
+if (chartCanvas && typeof Chart !== "undefined") {
+
+  const chartLabels = history.map(entry => {
+    const parti = entry.data.split("-");
+    return parti[2] + "/" + parti[1];
+  });
+
+  const chartWeights = history.map(entry =>
+    Number(entry.peso_kg)
+  );
+
+  if (window.myWeightChart) {
+    window.myWeightChart.destroy();
+  }
+
+  window.myWeightChart = new Chart(chartCanvas, {
+    type: "line",
+
+    data: {
+      labels: chartLabels,
+
+      datasets: [{
+        label: "Peso (kg)",
+        data: chartWeights,
+        tension: 0.3,
+        fill: false,
+        pointRadius: 5,
+        pointHoverRadius: 7,
+        borderWidth: 3
+      }]
+    },
+
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+
+      scales: {
+        y: {
+          beginAtZero: false,
+          title: {
+            display: true,
+            text: "kg"
+          }
+        },
+
+        x: {
+          title: {
+            display: true,
+            text: "Data"
+          }
+        }
+      }
+    }
+  });
+}
 }
 
 /* ============================
