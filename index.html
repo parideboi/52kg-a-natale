@@ -1121,17 +1121,26 @@ async function loadProgress() {
     text.textContent = Math.round(progresso) + "% completato";
   }
 
-  /* Legge lo storico peso */
-  const { data: history, error: historyError } = await db
-    .from("weight_entries")
-    .select("peso_kg,data")
-    .eq("user_id", user.id)
-    .order("data", { ascending: true });
+ /* Legge lo storico peso */
+const { data: history, error: historyError } = await db
+  .from("weight_entries")
+  .select("peso_kg, data")
+  .eq("user_id", user.id)
+  .order("data", { ascending: true });
 
-  if (historyError) {
-    console.error("Errore caricamento storico peso:", historyError);
-    return;
+console.log("STORICO PESO:", history);
+console.log("ERRORE STORICO:", historyError);
+
+if (historyError) {
+  console.error("Errore caricamento storico peso:", historyError);
+
+  if (historyBox) {
+    historyBox.innerHTML =
+      '<p class="muted">Errore nel caricamento dello storico.</p>';
   }
+
+  return;
+}
 
   const historyBox = document.getElementById("weightHistory");
 
