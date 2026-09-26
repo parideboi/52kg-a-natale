@@ -1324,6 +1324,7 @@ async function loadFood() {
   }
 
   if (!profile) return;
+ alert("TEST CIBO: peso=" + profile.peso_attuale + " altezza=" + profile.altezza_cm + " nascita=" + profile.data_nascita + " sesso=" + profile.sesso + " attività=" + profile.livello_attivita);
 
   const peso = Number(profile.peso_attuale || profile.peso_iniziale);
   const altezza = Number(profile.altezza_cm);
