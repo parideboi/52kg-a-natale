@@ -380,14 +380,69 @@ nav button {
 
 </section>
 
-  <section id="food" class="page">
-    <div class="card">
-      <h2>🍝 Alimentazione</h2>
-      <p class="muted">
-        Qui arriveranno archivio alimenti, piano e diario calorie.
-      </p>
+ <section id="food" class="page">
+
+  <div class="card">
+    <h2>🍝 Alimentazione</h2>
+    <p class="muted">Il tuo diario alimentare quotidiano.</p>
+  </div>
+
+  <div class="card">
+    <h3>🔥 Calorie di oggi</h3>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; text-align:center; margin-top:15px;">
+
+      <div>
+        <div class="muted">Obiettivo</div>
+        <strong id="foodCaloriesTarget">— kcal</strong>
+      </div>
+
+      <div>
+        <div class="muted">Consumate</div>
+        <strong id="foodCaloriesConsumed">0 kcal</strong>
+      </div>
+
+      <div>
+        <div class="muted">Rimanenti</div>
+        <strong id="foodCaloriesRemaining">— kcal</strong>
+      </div>
+
     </div>
-  </section>
+  </div>
+
+  <div class="card">
+    <h3>🥗 Pranzo</h3>
+    <div id="foodLunchList">
+      <p class="muted">Nessun alimento inserito.</p>
+    </div>
+    <button class="full" type="button">+ Aggiungi alimento</button>
+  </div>
+
+  <div class="card">
+    <h3>🍽️ Cena</h3>
+    <div id="foodDinnerList">
+      <p class="muted">Nessun alimento inserito.</p>
+    </div>
+    <button class="full" type="button">+ Aggiungi alimento</button>
+  </div>
+
+  <div class="card">
+    <h3>🍎 Spuntini / Extra</h3>
+    <div id="foodSnackList">
+      <p class="muted">Nessun alimento inserito.</p>
+    </div>
+    <button class="full" type="button">+ Aggiungi alimento</button>
+  </div>
+
+  <div class="card">
+    <h3>🥤 Bevande</h3>
+    <div id="foodDrinkList">
+      <p class="muted">Nessuna bevanda inserita.</p>
+    </div>
+    <button class="full" type="button">+ Aggiungi bevanda</button>
+  </div>
+
+</section>
 
   <section id="progress" class="page">
 
