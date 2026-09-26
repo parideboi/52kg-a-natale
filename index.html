@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111827">
+  <title>52 a Natale</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f3f4f6;
+      color: #111827;
+    }
+
+    header {
+      background: #111827;
+      color: white;
+      padding: 28px 20px 22px;
+      border-radius: 0 0 28px 28px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 30px;
+    }
+
+    header p {
+      margin: 6px 0 0;
+      opacity: .75;
+    }
+
+    main {
+      max-width: 700px;
+      margin: auto;
+      padding: 18px;
+      padding-bottom: 100px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 18px rgba(0,0,0,.06);
+    }
+
+    .big-number {
+      font-size: 36px;
+      font-weight: 800;
+    }
+
+    .muted {
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .progress {
+      height: 12px;
+      background: #e5e7eb;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-top: 12px;
+    }
+
+    .progress div {
+      height: 100%;
+      width: 0%;
+      background: #22c55e;
+      transition: .4s;
+    }
+
+    button {
+      border: none;
+      background: #111827;
+      color: white;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      font-size: 16px;
+    }
+
+    .meal {
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .meal:last-child {
+      border-bottom: none;
+    }
+
+    nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 5px 22px;
+      border-top: 1px solid #ddd;
+    }
+
+    nav button {
+      background: transparent;
+      color: #374151;
+      padding: 7px;
+      font-size: 13px;
+    }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    .success {
+      color: #16a34a;
+      font-weight: 700;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>52 a Natale 🎯</h1>
+  <p>Il mio percorso • 60 → 52 kg</p>
+</header>
+
+<main>
+
+<section id="home" class="page active">
+
+  <div class="card">
+    <div class="muted">Peso attuale</div>
+    <div class="big-number"><span id="currentWeight">60.0</span> kg</div>
+
+    <div class="progress">
+      <div id="weightProgress"></div>
+    </div>
+
+    <p class="muted">
+      Obiettivo: 52 kg entro Natale 🎄
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="muted">Obiettivo alimentare</div>
+    <div class="big-number">≈ 1300</div>
+    <div class="muted">kcal giornaliere indicative</div>
+  </div>
+
+  <div class="card">
+    <h3>💧 Acqua di oggi</h3>
+    <p><span id="water">0</span> / 8 bicchieri</p>
+    <button onclick="addWater()">+ 1 bicchiere</button>
+  </div>
+
+  <div class="card">
+    <h3>🏃 Movimento</h3>
+    <p>✔ Tapis roulant</p>
+    <p>✔ 10 minuti Tai Chi</p>
+  </div>
+
+</section>
+
+
+<section id="food" class="page">
+
+  <div class="card">
+    <h2>🍝 Alimentazione</h2>
+    <p class="muted">Settimana 28 settembre – 4 ottobre</p>
+
+    <div class="meal">
+      <strong>Lunedì 28</strong><br>
+      Pranzo: 90 g pasta al pomodoro + parmigiano<br>
+      Cena: pollo, patate, spinaci e pane<br>
+      <span class="success">≈ 1300 kcal</span>
+    </div>
+
+    <div class="meal">
+      <strong>Martedì 29</strong><br>
+      Pranzo: 90 g riso + tonno + piselli<br>
+      Cena: carne di cavallo, melanzane e pane<br>
+      <span class="success">≈ 1300 kcal</span>
+    </div>
+
+    <div class="meal">
+      <strong>Mercoledì 30</strong><br>
+      Pranzo: 80 g pasta al pesto<br>
+      Cena: orata, patate, verdure e pane<br>
+      <span class="success">≈ 1300 kcal</span>
+    </div>
+
+    <div class="meal">
+      <strong>Giovedì 1</strong><br>
+      Pranzo: pasta al sugo + mozzarella<br>
+      Cena: hamburger, patate e verdure<br>
+      <span class="success">≈ 1300 kcal</span>
+    </div>
+
+    <div class="meal">
+      <strong>Venerdì 2</strong><br>
+      Pranzo: riso + gamberi<br>
+      Cena: cotoletta + spinaci + patate<br>
+      <span class="success">≈ 1300 kcal</span>
+    </div>
+
+    <div class="meal">
+      <strong>Sabato 3</strong><br>
+      Pranzo: tonno + uova + insalata + pane<br>
+      Cena: 🍕 Pizza margherita + 1 birra/vino<br>
+      <span class="success">≈ 1450–1600 kcal</span>
+    </div>
+
+    <div class="meal">
+      <strong>Domenica 4</strong><br>
+      Pranzo: 90 g spaghetti alle vongole<br>
+      Cena: vitella + patate + verdure<br>
+      <span class="success">≈ 1350–1450 kcal</span>
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="training" class="page">
+
+  <div class="card">
+    <h2>🏃 Allenamento</h2>
+
+    <h3>Tapis roulant</h3>
+    <p>Lun–Mar: 30 minuti</p>
+    <p>Mer–Gio: 35 minuti</p>
+    <p>Ven: 40 minuti</p>
+    <p>Sab: 45 minuti</p>
+    <p>Dom: 30 minuti o riposo</p>
+
+    <hr>
+
+    <h3>🧘 Tai Chi</h3>
+    <p>10 minuti ogni giorno</p>
+  </div>
+
+</section>
+
+
+<section id="weight" class="page">
+
+  <div class="card">
+    <h2>⚖️ Diario peso</h2>
+
+    <label>Peso di oggi (kg)</label>
+    <input
+      id="weightInput"
+      type="number"
+      step="0.1"
+      placeholder="es. 59.7"
+    >
+
+    <button onclick="saveWeight()">Registra peso</button>
+
+    <p id="weightMessage"></p>
+  </div>
+
+  <div class="card">
+    <h3>Traguardo</h3>
+    <p>
+      Partenza: <strong>60 kg</strong><br>
+      Obiettivo: <strong>52 kg</strong><br>
+      Da perdere: <strong><span id="remaining">8.0</span> kg</strong>
+    </p>
+  </div>
+
+</section>
+
+</main>
+
+
+<nav>
+  <button onclick="showPage('home')">🏠<br>Home</button>
+  <button onclick="showPage('food')">🍝<br>Cibo</button>
+  <button onclick="showPage('training')">🏃<br>Training</button>
+  <button onclick="showPage('weight')">⚖️<br>Peso</button>
+</nav>
+
+
+<script>
+
+const START_WEIGHT = 60;
+const TARGET_WEIGHT = 52;
+
+let currentWeight =
+  parseFloat(localStorage.getItem("weight")) || START_WEIGHT;
+
+let water =
+  parseInt(localStorage.getItem("water")) || 0;
+
+
+function updateDashboard() {
+
+  document.getElementById("currentWeight").textContent =
+    currentWeight.toFixed(1);
+
+  const lost = START_WEIGHT - currentWeight;
+  const total = START_WEIGHT - TARGET_WEIGHT;
+
+  let progress = (lost / total) * 100;
+
+  progress = Math.max(0, Math.min(100, progress));
+
+  document.getElementById("weightProgress").style.width =
+    progress + "%";
+
+  document.getElementById("remaining").textContent =
+    Math.max(0, currentWeight - TARGET_WEIGHT).toFixed(1);
+
+  document.getElementById("water").textContent = water;
+}
+
+
+function saveWeight() {
+
+  const value =
+    parseFloat(document.getElementById("weightInput").value);
+
+  if (!value || value < 30 || value > 200) {
+    document.getElementById("weightMessage").textContent =
+      "Inserisci un peso valido.";
+    return;
+  }
+
+  currentWeight = value;
+
+  localStorage.setItem("weight", currentWeight);
+
+  document.getElementById("weightMessage").textContent =
+    "Peso registrato ✓";
+
+  updateDashboard();
+}
+
+
+function addWater() {
+
+  if (water < 20) {
+    water++;
+  }
+
+  localStorage.setItem("water", water);
+
+  updateDashboard();
+}
+
+
+function showPage(page) {
+
+  document.querySelectorAll(".page").forEach(p =>
+    p.classList.remove("active")
+  );
+
+  document.getElementById(page).classList.add("active");
+
+  window.scrollTo(0, 0);
+}
+
+
+updateDashboard();
+
+</script>
+
+</body>
+</html>
