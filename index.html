@@ -1,140 +1,149 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#111827">
-
 <title>MyGoal</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{box-sizing:border-box}
+* { box-sizing: border-box; }
 
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:#f3f4f6;
-  color:#111827;
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f3f4f6;
+  color: #111827;
 }
 
-header{
-  background:#111827;
-  color:white;
-  padding:28px 20px;
-  border-radius:0 0 28px 28px;
+header {
+  background: #111827;
+  color: white;
+  padding: 28px 20px;
+  border-radius: 0 0 28px 28px;
 }
 
-header h1{margin:0;font-size:30px}
-header p{margin:5px 0 0;opacity:.7}
-
-main{
-  max-width:700px;
-  margin:auto;
-  padding:20px 18px 110px;
+header h1 {
+  margin: 0;
+  font-size: 30px;
 }
 
-.card{
-  background:white;
-  border-radius:20px;
-  padding:20px;
-  margin-bottom:16px;
-  box-shadow:0 5px 20px rgba(0,0,0,.06);
+header p {
+  margin: 5px 0 0;
+  opacity: .7;
 }
 
-input,select{
-  width:100%;
-  padding:14px;
-  margin:6px 0 14px;
-  border:1px solid #d1d5db;
-  border-radius:12px;
-  font-size:16px;
+main {
+  max-width: 700px;
+  margin: auto;
+  padding: 20px 18px 110px;
 }
 
-button{
-  border:0;
-  border-radius:12px;
-  padding:13px 18px;
-  background:#111827;
-  color:white;
-  font-size:15px;
-  cursor:pointer;
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 5px 20px rgba(0,0,0,.06);
 }
 
-button.secondary{
-  background:#e5e7eb;
-  color:#111827;
+input, select {
+  width: 100%;
+  padding: 14px;
+  margin: 6px 0 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  font-size: 16px;
 }
 
-button.danger{background:#dc2626}
-
-.full{width:100%}
-
-.hidden{display:none!important}
-
-.muted{
-  color:#6b7280;
-  font-size:14px;
+button {
+  border: 0;
+  border-radius: 12px;
+  padding: 13px 18px;
+  background: #111827;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
 }
 
-.message{
-  margin-top:14px;
-  font-size:14px;
+button.secondary {
+  background: #e5e7eb;
+  color: #111827;
 }
 
-.success{color:#16a34a}
-.error{color:#dc2626}
-
-.logo{
-  text-align:center;
-  font-size:50px;
-  margin:10px 0;
+button.danger {
+  background: #dc2626;
 }
 
-.auth-title{
-  text-align:center;
-  margin-bottom:25px;
+.full { width: 100%; }
+.hidden { display: none !important; }
+
+.muted {
+  color: #6b7280;
+  font-size: 14px;
 }
 
-.auth-tabs{
-  display:flex;
-  gap:8px;
-  margin-bottom:20px;
+.message {
+  margin-top: 14px;
+  font-size: 14px;
 }
 
-.auth-tabs button{flex:1}
+.success { color: #16a34a; }
+.error { color: #dc2626; }
 
-.big{
-  font-size:38px;
-  font-weight:800;
+.logo {
+  text-align: center;
+  font-size: 50px;
+  margin: 10px 0;
 }
 
-nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:white;
-  border-top:1px solid #ddd;
-  display:flex;
-  justify-content:space-around;
-  padding:10px 5px calc(12px + env(safe-area-inset-bottom));
+.auth-title {
+  text-align: center;
+  margin-bottom: 25px;
 }
 
-nav button{
-  background:transparent;
-  color:#374151;
-  padding:7px;
-  font-size:13px;
+.auth-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
 }
 
-.page{display:none}
-.page.active{display:block}
+.auth-tabs button {
+  flex: 1;
+}
 
-.user-email{
-  word-break:break-word;
-  font-weight:600;
+.big {
+  font-size: 38px;
+  font-weight: 800;
+}
+
+nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 5px calc(12px + env(safe-area-inset-bottom));
+}
+
+nav button {
+  background: transparent;
+  color: #374151;
+  padding: 7px;
+  font-size: 13px;
+}
+
+.page { display: none; }
+.page.active { display: block; }
+
+.user-email {
+  word-break: break-word;
+  font-weight: 600;
 }
 </style>
 </head>
@@ -148,7 +157,6 @@ nav button{
 
 <main>
 
-<!-- LOGIN / REGISTRAZIONE -->
 <section id="authArea">
 
   <div class="logo">🎯</div>
@@ -210,7 +218,6 @@ nav button{
 </section>
 
 
-<!-- APP DOPO LOGIN -->
 <section id="appArea" class="hidden">
 
   <section id="home" class="page active">
@@ -239,49 +246,37 @@ nav button{
 
   </section>
 
-
   <section id="profile" class="page">
-
     <div class="card">
       <h2>👤 Profilo</h2>
       <p class="muted">
-        Nel prossimo aggiornamento inseriremo sesso, data di nascita,
-        altezza, peso, obiettivo e livello di attività.
+        Qui inseriremo sesso, data di nascita, altezza, peso,
+        obiettivo e livello di attività.
       </p>
     </div>
-
   </section>
 
-
   <section id="food" class="page">
-
     <div class="card">
       <h2>🍝 Alimentazione</h2>
       <p class="muted">
         Qui arriveranno archivio alimenti, piano e diario calorie.
       </p>
     </div>
-
   </section>
 
-
   <section id="progress" class="page">
-
     <div class="card">
       <h2>📈 Progressi</h2>
       <p class="muted">
         Qui arriveranno peso, grafico, acqua e allenamenti.
       </p>
     </div>
-
   </section>
 
-
   <section id="settings" class="page">
-
     <div class="card">
       <h2>⚙️ Account</h2>
-
       <p>Accesso effettuato come:</p>
       <p id="settingsEmail" class="user-email"></p>
 
@@ -289,13 +284,11 @@ nav button{
         Esci dall'account
       </button>
     </div>
-
   </section>
 
 </section>
 
 </main>
-
 
 <nav id="bottomNav" class="hidden">
   <button onclick="showPage('home')">🏠<br>Home</button>
@@ -308,344 +301,15 @@ nav button{
 
 <script>
 
-/* =========================================
-   CONFIGURAZIONE SUPABASE
-   ========================================= */
+/* ============================
+   SUPABASE
+   ============================ */
 
 const SUPABASE_URL =
   "https://zmbcmtydsqpwjydcfjuv.supabase.co";
 
-/*
- INCOLLA QUI SOTTO LA TUA PUBLISHABLE KEY.
- NON usare MAI la Secret key.
-*/
-
 const SUPABASE_KEY =
-  "<!DOCTYPE html>
-<html lang="it">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#111827">
-
-<title>MyGoal</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<style>
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:#f3f4f6;
-  color:#111827;
-}
-
-header{
-  background:#111827;
-  color:white;
-  padding:28px 20px;
-  border-radius:0 0 28px 28px;
-}
-
-header h1{margin:0;font-size:30px}
-header p{margin:5px 0 0;opacity:.7}
-
-main{
-  max-width:700px;
-  margin:auto;
-  padding:20px 18px 110px;
-}
-
-.card{
-  background:white;
-  border-radius:20px;
-  padding:20px;
-  margin-bottom:16px;
-  box-shadow:0 5px 20px rgba(0,0,0,.06);
-}
-
-input,select{
-  width:100%;
-  padding:14px;
-  margin:6px 0 14px;
-  border:1px solid #d1d5db;
-  border-radius:12px;
-  font-size:16px;
-}
-
-button{
-  border:0;
-  border-radius:12px;
-  padding:13px 18px;
-  background:#111827;
-  color:white;
-  font-size:15px;
-  cursor:pointer;
-}
-
-button.secondary{
-  background:#e5e7eb;
-  color:#111827;
-}
-
-button.danger{background:#dc2626}
-
-.full{width:100%}
-
-.hidden{display:none!important}
-
-.muted{
-  color:#6b7280;
-  font-size:14px;
-}
-
-.message{
-  margin-top:14px;
-  font-size:14px;
-}
-
-.success{color:#16a34a}
-.error{color:#dc2626}
-
-.logo{
-  text-align:center;
-  font-size:50px;
-  margin:10px 0;
-}
-
-.auth-title{
-  text-align:center;
-  margin-bottom:25px;
-}
-
-.auth-tabs{
-  display:flex;
-  gap:8px;
-  margin-bottom:20px;
-}
-
-.auth-tabs button{flex:1}
-
-.big{
-  font-size:38px;
-  font-weight:800;
-}
-
-nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:white;
-  border-top:1px solid #ddd;
-  display:flex;
-  justify-content:space-around;
-  padding:10px 5px calc(12px + env(safe-area-inset-bottom));
-}
-
-nav button{
-  background:transparent;
-  color:#374151;
-  padding:7px;
-  font-size:13px;
-}
-
-.page{display:none}
-.page.active{display:block}
-
-.user-email{
-  word-break:break-word;
-  font-weight:600;
-}
-</style>
-</head>
-
-<body>
-
-<header>
-  <h1>MyGoal 🎯</h1>
-  <p>Il tuo percorso. Il tuo obiettivo.</p>
-</header>
-
-<main>
-
-<!-- LOGIN / REGISTRAZIONE -->
-<section id="authArea">
-
-  <div class="logo">🎯</div>
-
-  <div class="auth-title">
-    <h2>Benvenuto in MyGoal</h2>
-    <p class="muted">
-      Crea il tuo spazio personale e ritrova i tuoi dati su tutti i dispositivi.
-    </p>
-  </div>
-
-  <div class="card">
-
-    <div class="auth-tabs">
-      <button id="loginTab" onclick="showLogin()">Accedi</button>
-      <button id="signupTab" class="secondary" onclick="showSignup()">Registrati</button>
-    </div>
-
-    <div id="loginForm">
-
-      <label>Email</label>
-      <input id="loginEmail" type="email" autocomplete="email"
-             placeholder="nome@email.it">
-
-      <label>Password</label>
-      <input id="loginPassword" type="password"
-             autocomplete="current-password"
-             placeholder="La tua password">
-
-      <button class="full" onclick="login()">Accedi</button>
-
-    </div>
-
-    <div id="signupForm" class="hidden">
-
-      <label>Nome</label>
-      <input id="signupName" type="text"
-             autocomplete="name"
-             placeholder="Il tuo nome">
-
-      <label>Email</label>
-      <input id="signupEmail" type="email"
-             autocomplete="email"
-             placeholder="nome@email.it">
-
-      <label>Password</label>
-      <input id="signupPassword" type="password"
-             autocomplete="new-password"
-             placeholder="Minimo 8 caratteri, lettere e numeri">
-
-      <button class="full" onclick="signup()">Crea account</button>
-
-    </div>
-
-    <div id="authMessage" class="message"></div>
-
-  </div>
-
-</section>
-
-
-<!-- APP DOPO LOGIN -->
-<section id="appArea" class="hidden">
-
-  <section id="home" class="page active">
-
-    <div class="card">
-      <div class="muted">Account</div>
-      <h2 id="welcomeName">Ciao 👋</h2>
-      <div id="userEmail" class="user-email"></div>
-    </div>
-
-    <div class="card">
-      <div class="muted">Peso attuale</div>
-      <div class="big" id="homeWeight">— kg</div>
-      <p class="muted">
-        Completeremo il tuo profilo nel prossimo passaggio.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>☁️ Sincronizzazione attiva</h3>
-      <p>
-        I dati di questo account saranno salvati nel database MyGoal
-        e potranno essere ritrovati sui tuoi dispositivi.
-      </p>
-    </div>
-
-  </section>
-
-
-  <section id="profile" class="page">
-
-    <div class="card">
-      <h2>👤 Profilo</h2>
-      <p class="muted">
-        Nel prossimo aggiornamento inseriremo sesso, data di nascita,
-        altezza, peso, obiettivo e livello di attività.
-      </p>
-    </div>
-
-  </section>
-
-
-  <section id="food" class="page">
-
-    <div class="card">
-      <h2>🍝 Alimentazione</h2>
-      <p class="muted">
-        Qui arriveranno archivio alimenti, piano e diario calorie.
-      </p>
-    </div>
-
-  </section>
-
-
-  <section id="progress" class="page">
-
-    <div class="card">
-      <h2>📈 Progressi</h2>
-      <p class="muted">
-        Qui arriveranno peso, grafico, acqua e allenamenti.
-      </p>
-    </div>
-
-  </section>
-
-
-  <section id="settings" class="page">
-
-    <div class="card">
-      <h2>⚙️ Account</h2>
-
-      <p>Accesso effettuato come:</p>
-      <p id="settingsEmail" class="user-email"></p>
-
-      <button class="danger full" onclick="logout()">
-        Esci dall'account
-      </button>
-    </div>
-
-  </section>
-
-</section>
-
-</main>
-
-
-<nav id="bottomNav" class="hidden">
-  <button onclick="showPage('home')">🏠<br>Home</button>
-  <button onclick="showPage('profile')">👤<br>Profilo</button>
-  <button onclick="showPage('food')">🍝<br>Cibo</button>
-  <button onclick="showPage('progress')">📈<br>Progressi</button>
-  <button onclick="showPage('settings')">⚙️<br>Account</button>
-</nav>
-
-
-<script>
-
-/* =========================================
-   CONFIGURAZIONE SUPABASE
-   ========================================= */
-
-const SUPABASE_URL =
-  "https://zmbcmtydsqpwjydcfjuv.supabase.co";
-
-/*
- INCOLLA QUI SOTTO LA TUA PUBLISHABLE KEY.
- NON usare MAI la Secret key.
-*/
-
-const SUPABASE_KEY =
-  "INCOLLA_QUI_LA_TUA_PUBLISHABLE_KEY";
-
+  "sb_publishable_qVZYHurjrhgi0NR00xfx-g_NwvX33Gq";
 
 const db = window.supabase.createClient(
   SUPABASE_URL,
@@ -653,47 +317,33 @@ const db = window.supabase.createClient(
 );
 
 
-/* =========================================
-   INTERFACCIA AUTH
-   ========================================= */
+/* ============================
+   INTERFACCIA
+   ============================ */
 
-function showLogin(){
+function showLogin() {
 
-  document.getElementById("loginForm")
-    .classList.remove("hidden");
+  document.getElementById("loginForm").classList.remove("hidden");
+  document.getElementById("signupForm").classList.add("hidden");
 
-  document.getElementById("signupForm")
-    .classList.add("hidden");
-
-  document.getElementById("loginTab")
-    .classList.remove("secondary");
-
-  document.getElementById("signupTab")
-    .classList.add("secondary");
+  document.getElementById("loginTab").classList.remove("secondary");
+  document.getElementById("signupTab").classList.add("secondary");
 
   clearMessage();
 }
 
+function showSignup() {
 
-function showSignup(){
+  document.getElementById("signupForm").classList.remove("hidden");
+  document.getElementById("loginForm").classList.add("hidden");
 
-  document.getElementById("signupForm")
-    .classList.remove("hidden");
-
-  document.getElementById("loginForm")
-    .classList.add("hidden");
-
-  document.getElementById("signupTab")
-    .classList.remove("secondary");
-
-  document.getElementById("loginTab")
-    .classList.add("secondary");
+  document.getElementById("signupTab").classList.remove("secondary");
+  document.getElementById("loginTab").classList.add("secondary");
 
   clearMessage();
 }
 
-
-function clearMessage(){
+function clearMessage() {
 
   const box = document.getElementById("authMessage");
 
@@ -701,8 +351,7 @@ function clearMessage(){
   box.className = "message";
 }
 
-
-function setMessage(text,type){
+function setMessage(text, type) {
 
   const box = document.getElementById("authMessage");
 
@@ -712,11 +361,11 @@ function setMessage(text,type){
 }
 
 
-/* =========================================
+/* ============================
    REGISTRAZIONE
-   ========================================= */
+   ============================ */
 
-async function signup(){
+async function signup() {
 
   clearMessage();
 
@@ -729,7 +378,7 @@ async function signup(){
   const password =
     document.getElementById("signupPassword").value;
 
-  if(!nome || !email || !password){
+  if (!nome || !email || !password) {
 
     setMessage(
       "Compila nome, email e password.",
@@ -739,17 +388,16 @@ async function signup(){
     return;
   }
 
-
   const { data, error } =
     await db.auth.signUp({
 
       email: email,
-
       password: password,
 
-      options:{
-        data:{
-          nome:nome
+      options: {
+
+        data: {
+          nome: nome
         },
 
         emailRedirectTo:
@@ -759,16 +407,13 @@ async function signup(){
 
     });
 
+  if (error) {
 
-  if(error){
-
-    setMessage(error.message,"error");
-
+    setMessage(error.message, "error");
     return;
   }
 
-
-  if(data.session){
+  if (data.session) {
 
     await createProfileIfNeeded(
       data.user,
@@ -782,20 +427,18 @@ async function signup(){
     return;
   }
 
-
   setMessage(
     "Account creato. Controlla la tua email e conferma la registrazione.",
     "success"
   );
-
 }
 
 
-/* =========================================
+/* ============================
    LOGIN
-   ========================================= */
+   ============================ */
 
-async function login(){
+async function login() {
 
   clearMessage();
 
@@ -805,8 +448,7 @@ async function login(){
   const password =
     document.getElementById("loginPassword").value;
 
-
-  if(!email || !password){
+  if (!email || !password) {
 
     setMessage(
       "Inserisci email e password.",
@@ -816,420 +458,13 @@ async function login(){
     return;
   }
 
-
   const { data, error } =
     await db.auth.signInWithPassword({
-      email:email,
-      password:password
-    });
-
-
-  if(error){
-
-    setMessage(
-      "Accesso non riuscito: " + error.message,
-      "error"
-    );
-
-    return;
-  }
-
-
-  await createProfileIfNeeded(
-    data.user,
-    data.user.user_metadata?.nome || ""
-  );
-
-  await showLoggedUser(
-    data.user
-  );
-
-}
-
-
-/* =========================================
-   CREA PROFILO PERSONALE
-   ========================================= */
-
-async function createProfileIfNeeded(user,nome){
-
-  if(!user) return;
-
-
-  const { data:existing } =
-    await db
-      .from("profiles")
-      .select("user_id")
-      .eq("user_id",user.id)
-      .maybeSingle();
-
-
-  if(existing) return;
-
-
-  const { error } =
-    await db
-      .from("profiles")
-      .insert({
-        user_id:user.id,
-        nome:
-          nome ||
-          user.user_metadata?.nome ||
-          ""
-      });
-
-
-  if(error){
-
-    console.error(
-      "Errore creazione profilo:",
-      error
-    );
-
-  }
-
-}
-
-
-/* =========================================
-   MOSTRA UTENTE
-   ========================================= */
-
-async function showLoggedUser(user){
-
-  if(!user) return;
-
-
-  document.getElementById("authArea")
-    .classList.add("hidden");
-
-  document.getElementById("appArea")
-    .classList.remove("hidden");
-
-  document.getElementById("bottomNav")
-    .classList.remove("hidden");
-
-
-  document.getElementById("userEmail")
-    .textContent = user.email || "";
-
-  document.getElementById("settingsEmail")
-    .textContent = user.email || "";
-
-
-  const { data:profile } =
-    await db
-      .from("profiles")
-      .select("*")
-      .eq("user_id",user.id)
-      .maybeSingle();
-
-
-  const nome =
-    profile?.nome ||
-    user.user_metadata?.nome ||
-    "";
-
-
-  document.getElementById("welcomeName")
-    .textContent =
-      nome ? "Ciao, " + nome + " 👋" : "Ciao 👋";
-
-
-  if(profile?.peso_iniziale){
-
-    document.getElementById("homeWeight")
-      .textContent =
-        profile.peso_iniziale + " kg";
-
-  }
-
-}
-
-
-/* =========================================
-   LOGOUT
-   ========================================= */
-
-async function logout(){
-
-  await db.auth.signOut();
-
-  document.getElementById("appArea")
-    .classList.add("hidden");
-
-  document.getElementById("bottomNav")
-    .classList.add("hidden");
-
-  document.getElementById("authArea")
-    .classList.remove("hidden");
-
-  showLogin();
-
-}
-
-
-/* =========================================
-   NAVIGAZIONE
-   ========================================= */
-
-function showPage(page){
-
-  document
-    .querySelectorAll(".page")
-    .forEach(p =>
-      p.classList.remove("active")
-    );
-
-  document
-    .getElementById(page)
-    .classList.add("active");
-
-  window.scrollTo(0,0);
-
-}
-
-
-/* =========================================
-   CONTROLLO SESSIONE ALL'AVVIO
-   ========================================= */
-
-async function initialiseApp(){
-
-  const {
-    data:{session}
-  } = await db.auth.getSession();
-
-
-  if(session?.user){
-
-    await createProfileIfNeeded(
-      session.user,
-      session.user.user_metadata?.nome || ""
-    );
-
-    await showLoggedUser(
-      session.user
-    );
-
-  }
-
-}
-
-
-db.auth.onAuthStateChange(
-  async(event,session)=>{
-
-    if(
-      event === "SIGNED_IN" &&
-      session?.user
-    ){
-
-      setTimeout(async()=>{
-
-        await createProfileIfNeeded(
-          session.user,
-          session.user.user_metadata?.nome || ""
-        );
-
-        await showLoggedUser(
-          session.user
-        );
-
-      },0);
-
-    }
-
-  }
-);
-
-
-initialiseApp();
-
-</script>
-
-</body>
-</html>";
-
-
-const db = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-
-
-/* =========================================
-   INTERFACCIA AUTH
-   ========================================= */
-
-function showLogin(){
-
-  document.getElementById("loginForm")
-    .classList.remove("hidden");
-
-  document.getElementById("signupForm")
-    .classList.add("hidden");
-
-  document.getElementById("loginTab")
-    .classList.remove("secondary");
-
-  document.getElementById("signupTab")
-    .classList.add("secondary");
-
-  clearMessage();
-}
-
-
-function showSignup(){
-
-  document.getElementById("signupForm")
-    .classList.remove("hidden");
-
-  document.getElementById("loginForm")
-    .classList.add("hidden");
-
-  document.getElementById("signupTab")
-    .classList.remove("secondary");
-
-  document.getElementById("loginTab")
-    .classList.add("secondary");
-
-  clearMessage();
-}
-
-
-function clearMessage(){
-
-  const box = document.getElementById("authMessage");
-
-  box.textContent = "";
-  box.className = "message";
-}
-
-
-function setMessage(text,type){
-
-  const box = document.getElementById("authMessage");
-
-  box.textContent = text;
-  box.className =
-    "message " + (type === "error" ? "error" : "success");
-}
-
-
-/* =========================================
-   REGISTRAZIONE
-   ========================================= */
-
-async function signup(){
-
-  clearMessage();
-
-  const nome =
-    document.getElementById("signupName").value.trim();
-
-  const email =
-    document.getElementById("signupEmail").value.trim();
-
-  const password =
-    document.getElementById("signupPassword").value;
-
-  if(!nome || !email || !password){
-
-    setMessage(
-      "Compila nome, email e password.",
-      "error"
-    );
-
-    return;
-  }
-
-
-  const { data, error } =
-    await db.auth.signUp({
-
       email: email,
-
-      password: password,
-
-      options:{
-        data:{
-          nome:nome
-        },
-
-        emailRedirectTo:
-          window.location.origin +
-          window.location.pathname
-      }
-
+      password: password
     });
 
-
-  if(error){
-
-    setMessage(error.message,"error");
-
-    return;
-  }
-
-
-  if(data.session){
-
-    await createProfileIfNeeded(
-      data.user,
-      nome
-    );
-
-    await showLoggedUser(
-      data.user
-    );
-
-    return;
-  }
-
-
-  setMessage(
-    "Account creato. Controlla la tua email e conferma la registrazione.",
-    "success"
-  );
-
-}
-
-
-/* =========================================
-   LOGIN
-   ========================================= */
-
-async function login(){
-
-  clearMessage();
-
-  const email =
-    document.getElementById("loginEmail").value.trim();
-
-  const password =
-    document.getElementById("loginPassword").value;
-
-
-  if(!email || !password){
-
-    setMessage(
-      "Inserisci email e password.",
-      "error"
-    );
-
-    return;
-  }
-
-
-  const { data, error } =
-    await db.auth.signInWithPassword({
-      email:email,
-      password:password
-    });
-
-
-  if(error){
+  if (error) {
 
     setMessage(
       "Accesso non riuscito: " + error.message,
@@ -1239,7 +474,6 @@ async function login(){
     return;
   }
 
-
   await createProfileIfNeeded(
     data.user,
     data.user.user_metadata?.nome || ""
@@ -1248,62 +482,55 @@ async function login(){
   await showLoggedUser(
     data.user
   );
-
 }
 
 
-/* =========================================
-   CREA PROFILO PERSONALE
-   ========================================= */
+/* ============================
+   PROFILO
+   ============================ */
 
-async function createProfileIfNeeded(user,nome){
+async function createProfileIfNeeded(user, nome) {
 
-  if(!user) return;
+  if (!user) return;
 
-
-  const { data:existing } =
+  const { data: existing, error: readError } =
     await db
       .from("profiles")
       .select("user_id")
-      .eq("user_id",user.id)
+      .eq("user_id", user.id)
       .maybeSingle();
 
+  if (readError) {
+    console.error("Errore lettura profilo:", readError);
+    return;
+  }
 
-  if(existing) return;
-
+  if (existing) return;
 
   const { error } =
     await db
       .from("profiles")
       .insert({
-        user_id:user.id,
+        user_id: user.id,
         nome:
           nome ||
           user.user_metadata?.nome ||
           ""
       });
 
-
-  if(error){
-
-    console.error(
-      "Errore creazione profilo:",
-      error
-    );
-
+  if (error) {
+    console.error("Errore creazione profilo:", error);
   }
-
 }
 
 
-/* =========================================
-   MOSTRA UTENTE
-   ========================================= */
+/* ============================
+   UTENTE LOGGATO
+   ============================ */
 
-async function showLoggedUser(user){
+async function showLoggedUser(user) {
 
-  if(!user) return;
-
+  if (!user) return;
 
   document.getElementById("authArea")
     .classList.add("hidden");
@@ -1314,49 +541,44 @@ async function showLoggedUser(user){
   document.getElementById("bottomNav")
     .classList.remove("hidden");
 
-
   document.getElementById("userEmail")
     .textContent = user.email || "";
 
   document.getElementById("settingsEmail")
     .textContent = user.email || "";
 
-
-  const { data:profile } =
+  const { data: profile } =
     await db
       .from("profiles")
       .select("*")
-      .eq("user_id",user.id)
+      .eq("user_id", user.id)
       .maybeSingle();
-
 
   const nome =
     profile?.nome ||
     user.user_metadata?.nome ||
     "";
 
-
   document.getElementById("welcomeName")
     .textContent =
-      nome ? "Ciao, " + nome + " 👋" : "Ciao 👋";
+      nome
+        ? "Ciao, " + nome + " 👋"
+        : "Ciao 👋";
 
-
-  if(profile?.peso_iniziale){
+  if (profile?.peso_iniziale) {
 
     document.getElementById("homeWeight")
       .textContent =
         profile.peso_iniziale + " kg";
-
   }
-
 }
 
 
-/* =========================================
+/* ============================
    LOGOUT
-   ========================================= */
+   ============================ */
 
-async function logout(){
+async function logout() {
 
   await db.auth.signOut();
 
@@ -1370,15 +592,14 @@ async function logout(){
     .classList.remove("hidden");
 
   showLogin();
-
 }
 
 
-/* =========================================
+/* ============================
    NAVIGAZIONE
-   ========================================= */
+   ============================ */
 
-function showPage(page){
+function showPage(page) {
 
   document
     .querySelectorAll(".page")
@@ -1390,23 +611,21 @@ function showPage(page){
     .getElementById(page)
     .classList.add("active");
 
-  window.scrollTo(0,0);
-
+  window.scrollTo(0, 0);
 }
 
 
-/* =========================================
-   CONTROLLO SESSIONE ALL'AVVIO
-   ========================================= */
+/* ============================
+   AVVIO
+   ============================ */
 
-async function initialiseApp(){
+async function initialiseApp() {
 
   const {
-    data:{session}
+    data: { session }
   } = await db.auth.getSession();
 
-
-  if(session?.user){
+  if (session?.user) {
 
     await createProfileIfNeeded(
       session.user,
@@ -1416,21 +635,18 @@ async function initialiseApp(){
     await showLoggedUser(
       session.user
     );
-
   }
-
 }
 
-
 db.auth.onAuthStateChange(
-  async(event,session)=>{
+  async (event, session) => {
 
-    if(
+    if (
       event === "SIGNED_IN" &&
       session?.user
-    ){
+    ) {
 
-      setTimeout(async()=>{
+      setTimeout(async () => {
 
         await createProfileIfNeeded(
           session.user,
@@ -1441,13 +657,10 @@ db.auth.onAuthStateChange(
           session.user
         );
 
-      },0);
-
+      }, 0);
     }
-
   }
 );
-
 
 initialiseApp();
 
