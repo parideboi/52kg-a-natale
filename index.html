@@ -1315,6 +1315,7 @@ async function loadFood() {
   } = await db.auth.getUser();
 
   if (!user) return;
+ alert("LOADFOOD: utente trovato");
 
   const { data: profile, error } = await db
     .from("profiles")
