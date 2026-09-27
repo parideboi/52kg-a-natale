@@ -1418,12 +1418,18 @@ async function addFood(tipo) {
 
   if (!quantita) return;
 
+  const calorie = prompt("Calorie totali:");
+
+  if (!calorie) return;
+
   alert(
     "Hai scelto: " +
     nome +
     " - " +
     quantita +
     " g - " +
+    calorie +
+    " kcal - " +
     tipo
   );
 }
