@@ -1531,6 +1531,23 @@ if (remainingEl && targetEl) {
   remainingEl.textContent = calorieRimanenti + " kcal";
 }
 }
+ async function deleteFood(id) {
+  const conferma = confirm("Vuoi eliminare questo alimento?");
+
+  if (!conferma) return;
+
+  const { error } = await db
+    .from("food_entries")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    alert("Errore durante l'eliminazione: " + error.message);
+    return;
+  }
+
+  await loadTodayFood();
+}
 /* ============================
    AVVIO
    ============================ */
