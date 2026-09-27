@@ -415,7 +415,7 @@ nav button {
     <div id="foodLunchList">
       <p class="muted">Nessun alimento inserito.</p>
     </div>
-    <button class="full" type="button">+ Aggiungi alimento</button>
+   <button class="full" type="button" onclick="addFood('pranzo')">+ Aggiungi alimento</button>
   </div>
 
   <div class="card">
@@ -1409,7 +1409,9 @@ if (!user) {
     remainingEl.textContent = calorieTarget + " kcal";
   }
 }
-
+async function addFood(tipo) {
+  alert("AGGIUNGI ALIMENTO: " + tipo);
+}
 /* ============================
    AVVIO
    ============================ */
