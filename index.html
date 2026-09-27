@@ -1600,6 +1600,54 @@ function closeFoodModal() {
     modal.style.display = "none";
   }
 }
+
+ async function saveFoodFromModal() {
+  const nome = document.getElementById("foodNameInput").value.trim();
+  const quantita = document.getElementById("foodQuantityInput").value;
+  const calorie = document.getElementById("foodCaloriesInput").value;
+
+  if (!nome || !quantita || !calorie) {
+    alert("Compila tutti i campi.");
+    return;
+  }
+
+  const {
+    data: { session }
+  } = await db.auth.getSession();
+
+  const user = session?.user;
+
+  if (!user) {
+    alert("Utente non trovato.");
+    return;
+  }
+
+  const oggi = new Date().toISOString().split("T")[0];
+
+  const { error } = await db
+    .from("food_entries")
+    .insert({
+      user_id: user.id,
+      data: oggi,
+      pasto: currentFoodType,
+      alimento: nome,
+      quantita: Number(quantita),
+      unita: currentFoodType === "bevanda" ? "ml" : "g",
+      calorie: Number(calorie)
+    });
+
+  if (error) {
+    alert("Errore nel salvataggio: " + error.message);
+    return;
+  }
+
+  document.getElementById("foodNameInput").value = "";
+  document.getElementById("foodQuantityInput").value = "";
+  document.getElementById("foodCaloriesInput").value = "";
+
+  closeFoodModal();
+  await loadTodayFood();
+}
 /* ============================
    AVVIO
    ============================ */
