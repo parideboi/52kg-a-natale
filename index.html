@@ -1408,6 +1408,7 @@ if (!user) {
   if (remainingEl) {
     remainingEl.textContent = calorieTarget + " kcal";
   }
+ await loadTodayFood(calorieTarget);
 }
 async function addFood(tipo) {
   const nome = prompt("Nome dell'alimento:");
@@ -1450,6 +1451,31 @@ async function addFood(tipo) {
   }
 
   alert("Alimento salvato!");
+}
+
+ async function loadTodayFood() {
+  const {
+    data: { session }
+  } = await db.auth.getSession();
+
+  const user = session?.user;
+  if (!user) return;
+
+  const oggi = new Date().toISOString().split("T")[0];
+
+  const { data, error } = await db
+    .from("food_entries")
+    .select("*")
+    .eq("user_id", user.id)
+    .eq("data", oggi)
+    .order("created_at", { ascending: true });
+
+  if (error) {
+    console.error("Errore caricamento diario:", error);
+    return;
+  }
+
+  console.log("ALIMENTI DI OGGI:", data);
 }
 /* ============================
    AVVIO
