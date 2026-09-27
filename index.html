@@ -1410,7 +1410,11 @@ if (!user) {
   }
 }
 async function addFood(tipo) {
-  alert("AGGIUNGI ALIMENTO: " + tipo);
+  const nome = prompt("Nome dell'alimento:");
+
+  if (!nome) return;
+
+  alert("Hai scelto: " + nome + " - " + tipo);
 }
 /* ============================
    AVVIO
