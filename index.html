@@ -1414,7 +1414,18 @@ async function addFood(tipo) {
 
   if (!nome) return;
 
-  alert("Hai scelto: " + nome + " - " + tipo);
+  const quantita = prompt("Quantità in grammi:");
+
+  if (!quantita) return;
+
+  alert(
+    "Hai scelto: " +
+    nome +
+    " - " +
+    quantita +
+    " g - " +
+    tipo
+  );
 }
 /* ============================
    AVVIO
