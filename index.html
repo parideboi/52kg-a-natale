@@ -1504,6 +1504,26 @@ data.forEach(item => {
     snackList.appendChild(riga);
   }
 });
+
+  const calorieConsumate = data.reduce(
+  (totale, item) => totale + Number(item.calorie || 0),
+  0
+);
+
+const consumedEl = document.getElementById("foodCaloriesConsumed");
+const remainingEl = document.getElementById("foodCaloriesRemaining");
+const targetEl = document.getElementById("foodCaloriesTarget");
+
+if (consumedEl) {
+  consumedEl.textContent = calorieConsumate + " kcal";
+}
+
+if (remainingEl && targetEl) {
+  const calorieTarget = parseInt(targetEl.textContent) || 0;
+  const calorieRimanenti = calorieTarget - calorieConsumate;
+
+  remainingEl.textContent = calorieRimanenti + " kcal";
+}
 }
 /* ============================
    AVVIO
