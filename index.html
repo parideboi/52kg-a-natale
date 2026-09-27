@@ -1480,10 +1480,12 @@ async function addFood(tipo) {
   const lunchList = document.getElementById("foodLunchList");
 const dinnerList = document.getElementById("foodDinnerList");
 const snackList = document.getElementById("foodSnackList");
+const drinkList = document.getElementById("foodDrinkList");
 
 if (lunchList) lunchList.innerHTML = "";
 if (dinnerList) dinnerList.innerHTML = "";
 if (snackList) snackList.innerHTML = "";
+if (drinkList) drinkList.innerHTML = "";
 
 data.forEach(item => {
   const riga = document.createElement("div");
@@ -1504,6 +1506,9 @@ data.forEach(item => {
   if (item.pasto === "spuntino" && snackList) {
     snackList.appendChild(riga);
   }
+ if (item.pasto === "bevanda" && drinkList) {
+  drinkList.appendChild(riga);
+}
 });
 
   const calorieConsumate = data.reduce(
