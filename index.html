@@ -1441,7 +1441,7 @@ async function addFood(tipo) {
       pasto: tipo,
       alimento: nome,
       quantita: Number(quantita),
-      unita: "g",
+      unita: tipo === "bevanda" ? "ml" : "g",
       calorie: Number(calorie)
     });
 
