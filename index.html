@@ -1411,27 +1411,45 @@ if (!user) {
 }
 async function addFood(tipo) {
   const nome = prompt("Nome dell'alimento:");
-
   if (!nome) return;
 
   const quantita = prompt("Quantità in grammi:");
-
   if (!quantita) return;
 
   const calorie = prompt("Calorie totali:");
-
   if (!calorie) return;
 
-  alert(
-    "Hai scelto: " +
-    nome +
-    " - " +
-    quantita +
-    " g - " +
-    calorie +
-    " kcal - " +
-    tipo
-  );
+  const {
+    data: { session }
+  } = await db.auth.getSession();
+
+  const user = session?.user;
+
+  if (!user) {
+    alert("Utente non trovato.");
+    return;
+  }
+
+  const oggi = new Date().toISOString().split("T")[0];
+
+  const { error } = await db
+    .from("food_entries")
+    .insert({
+      user_id: user.id,
+      data: oggi,
+      pasto: tipo,
+      alimento: nome,
+      quantita: Number(quantita),
+      unita: "g",
+      calorie: Number(calorie)
+    });
+
+  if (error) {
+    alert("Errore nel salvataggio: " + error.message);
+    return;
+  }
+
+  alert("Alimento salvato!");
 }
 /* ============================
    AVVIO
