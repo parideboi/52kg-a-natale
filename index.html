@@ -444,6 +444,30 @@ nav button {
 
 </section>
 
+ <!-- FINESTRA AGGIUNGI ALIMENTO -->
+<div id="foodModal" style="display:none;">
+  <div class="card">
+    <h3 id="foodModalTitle">🍽️ Aggiungi alimento</h3>
+
+    <label>Alimento</label>
+    <input id="foodNameInput" type="text" placeholder="Es. Pasta">
+
+    <label>Quantità</label>
+    <input id="foodQuantityInput" type="number" placeholder="Es. 80">
+
+    <label>Calorie totali</label>
+    <input id="foodCaloriesInput" type="number" placeholder="Es. 280">
+
+    <button type="button" onclick="saveFoodFromModal()">
+      Salva
+    </button>
+
+    <button type="button" onclick="closeFoodModal()">
+      Annulla
+    </button>
+  </div>
+</div>
+
   <section id="progress" class="page">
 
   <div class="card">
