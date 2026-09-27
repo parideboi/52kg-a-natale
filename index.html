@@ -1476,6 +1476,34 @@ async function addFood(tipo) {
   }
 
   console.log("ALIMENTI DI OGGI:", data);
+  const lunchList = document.getElementById("foodLunchList");
+const dinnerList = document.getElementById("foodDinnerList");
+const snackList = document.getElementById("foodSnackList");
+
+if (lunchList) lunchList.innerHTML = "";
+if (dinnerList) dinnerList.innerHTML = "";
+if (snackList) snackList.innerHTML = "";
+
+data.forEach(item => {
+  const riga = document.createElement("div");
+
+  riga.innerHTML =
+    "<strong>" + item.alimento + "</strong> — " +
+    item.quantita + " " + item.unita +
+    " — " + item.calorie + " kcal";
+
+  if (item.pasto === "pranzo" && lunchList) {
+    lunchList.appendChild(riga);
+  }
+
+  if (item.pasto === "cena" && dinnerList) {
+    dinnerList.appendChild(riga);
+  }
+
+  if (item.pasto === "spuntino" && snackList) {
+    snackList.appendChild(riga);
+  }
+});
 }
 /* ============================
    AVVIO
