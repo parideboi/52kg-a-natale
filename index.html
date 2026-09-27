@@ -1311,12 +1311,21 @@ if (chartCanvas && typeof Chart !== "undefined") {
 
 async function loadFood() {
 alert("LOADFOOD È PARTITA");
-  const {
-    data: { user }
-  } = await db.auth.getUser();
+  const { data: { session }, error: sessionError } = await db.auth.getSession();
 
-  if (!user) return;
- alert("LOADFOOD: utente trovato");
+if (sessionError) {
+  alert("ERRORE SESSIONE: " + sessionError.message);
+  return;
+}
+
+const user = session?.user;
+
+if (!user) {
+  alert("NESSUN UTENTE NELLA SESSIONE");
+  return;
+}
+
+alert("LOADFOOD: utente trovato");
 
   const { data: profile, error } = await db
     .from("profiles")
