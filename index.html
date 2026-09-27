@@ -1572,6 +1572,34 @@ if (remainingEl && targetEl) {
 
   await loadTodayFood();
 }
+
+ let currentFoodType = "";
+
+function openFoodModal(tipo) {
+  currentFoodType = tipo;
+
+  const modal = document.getElementById("foodModal");
+  const title = document.getElementById("foodModalTitle");
+
+  if (title) {
+    if (tipo === "pranzo") title.textContent = "🍽️ Aggiungi alimento al pranzo";
+    if (tipo === "cena") title.textContent = "🌙 Aggiungi alimento alla cena";
+    if (tipo === "spuntino") title.textContent = "🍎 Aggiungi spuntino / extra";
+    if (tipo === "bevanda") title.textContent = "🥤 Aggiungi bevanda";
+  }
+
+  if (modal) {
+    modal.style.display = "block";
+  }
+}
+
+function closeFoodModal() {
+  const modal = document.getElementById("foodModal");
+
+  if (modal) {
+    modal.style.display = "none";
+  }
+}
 /* ============================
    AVVIO
    ============================ */
