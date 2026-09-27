@@ -145,6 +145,25 @@ nav button {
   word-break: break-word;
   font-weight: 600;
 }
+ /* Finestra popup aggiunta alimento */
+#foodModal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(17, 24, 39, 0.55);
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+#foodModal .card {
+  width: 100%;
+  max-width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
+  margin: auto;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
 </style>
  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
