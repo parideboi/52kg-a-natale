@@ -1491,10 +1491,10 @@ data.forEach(item => {
   const riga = document.createElement("div");
 
   riga.innerHTML =
-    "<strong>" + item.alimento + "</strong> — " +
-    item.quantita + " " + item.unita +
-    " — " + item.calorie + " kcal";
-
+  "<strong>" + item.alimento + "</strong> — " +
+  item.quantita + " " + item.unita +
+  " — " + item.calorie + " kcal " +
+  "<button onclick=\"deleteFood('" + item.id + "')\">🗑️</button>";
   if (item.pasto === "pranzo" && lunchList) {
     lunchList.appendChild(riga);
   }
