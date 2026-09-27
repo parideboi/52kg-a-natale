@@ -1083,7 +1083,6 @@ async function logout() {
    ============================ */
 
 function showPage(page) {
-alert("TEST MYGOAL 123 - PAGINA: " + page);
 
   document
     .querySelectorAll(".page")
@@ -1309,7 +1308,7 @@ if (chartCanvas && typeof Chart !== "undefined") {
 ========================= */
 
 async function loadFood() {
-alert("LOADFOOD È PARTITA");
+
   const { data: { session }, error: sessionError } = await db.auth.getSession();
 
 if (sessionError) {
@@ -1324,7 +1323,7 @@ if (!user) {
   return;
 }
 
-alert("LOADFOOD: utente trovato");
+
 
   const { data: profile, error } = await db
     .from("profiles")
@@ -1338,7 +1337,7 @@ alert("LOADFOOD: utente trovato");
   }
 
   if (!profile) return;
- alert("TEST CIBO: peso=" + profile.peso_attuale + " altezza=" + profile.altezza_cm + " nascita=" + profile.data_nascita + " sesso=" + profile.sesso + " attività=" + profile.livello_attivita);
+ 
 
   const peso = Number(profile.peso_attuale || profile.peso_iniziale);
   const altezza = Number(profile.altezza_cm);
