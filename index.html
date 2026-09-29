@@ -1527,11 +1527,13 @@ async function addFood(tipo) {
   }
 
   console.log("ALIMENTI DI OGGI:", data);
+  const breakfastList = document.getElementById("foodBreakfastList");
   const lunchList = document.getElementById("foodLunchList");
 const dinnerList = document.getElementById("foodDinnerList");
 const snackList = document.getElementById("foodSnackList");
 const drinkList = document.getElementById("foodDrinkList");
 
+if (breakfastList) breakfastList.innerHTML = "";
 if (lunchList) lunchList.innerHTML = "";
 if (dinnerList) dinnerList.innerHTML = "";
 if (snackList) snackList.innerHTML = "";
@@ -1545,6 +1547,9 @@ data.forEach(item => {
   item.quantita + " " + item.unita +
   " — " + item.calorie + " kcal " +
   "<button onclick=\"deleteFood('" + item.id + "')\">🗑️</button>";
+ if (item.pasto === "colazione" && breakfastList) {
+  breakfastList.appendChild(riga);
+}
   if (item.pasto === "pranzo" && lunchList) {
     lunchList.appendChild(riga);
   }
