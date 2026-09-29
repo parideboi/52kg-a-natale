@@ -1608,6 +1608,7 @@ function openFoodModal(tipo) {
   const title = document.getElementById("foodModalTitle");
 
   if (title) {
+   if (tipo === "colazione") title.textContent = "🍳 Aggiungi alimento alla colazione";
     if (tipo === "pranzo") title.textContent = "🍽️ Aggiungi alimento al pranzo";
     if (tipo === "cena") title.textContent = "🌙 Aggiungi alimento alla cena";
     if (tipo === "spuntino") title.textContent = "🍎 Aggiungi spuntino / extra";
