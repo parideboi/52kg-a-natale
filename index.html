@@ -474,7 +474,7 @@ nav button {
     <strong>0 bicchieri</strong>
    <div>
   <button type="button">−</button>
-  <button type="button">+</button>
+ <button type="button" onclick="addWaterGlass()">+</button>
 </div>
   </div>
 </div>
@@ -1616,6 +1616,17 @@ if (remainingEl && targetEl) {
 }
 
  let currentFoodType = "";
+ let waterGlassCount = 0;
+
+function addWaterGlass() {
+  waterGlassCount = waterGlassCount + 1;
+
+  const waterGlasses = document.querySelector("#waterGlasses strong");
+
+  if (waterGlasses) {
+    waterGlasses.textContent = waterGlassCount + " bicchieri";
+  }
+}
 
 function openFoodModal(tipo) {
   currentFoodType = tipo;
