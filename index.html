@@ -1617,8 +1617,32 @@ if (remainingEl && targetEl) {
 
  let currentFoodType = "";
  let waterGlassCount = 0;
- 
-function addWaterGlass() {
+ const WATER_GLASS_ML = 250;
+async function addWaterGlass() {
+ const {
+  data: { session }
+} = await db.auth.getSession();
+
+const user = session?.user;
+
+if (!user) {
+  alert("Utente non trovato.");
+  return;
+}
+ const oggi = new Date().toISOString().split("T")[0];
+
+const { error } = await db
+  .from("water_entries")
+  .insert({
+    user_id: user.id,
+    quantita_ml: WATER_GLASS_ML,
+    data: oggi
+  });
+
+if (error) {
+  alert("Errore nel salvataggio acqua: " + error.message);
+  return;
+}
   waterGlassCount = waterGlassCount + 1;
 
   const waterGlasses = document.querySelector("#waterGlasses strong");
