@@ -473,7 +473,7 @@ nav button {
   <div id="waterGlasses">
     <strong>0 bicchieri</strong>
    <div>
-  <button type="button">−</button>
+  <button type="button" onclick="removeWaterGlass()">−</button>
  <button type="button" onclick="addWaterGlass()">+</button>
 </div>
   </div>
@@ -1617,9 +1617,20 @@ if (remainingEl && targetEl) {
 
  let currentFoodType = "";
  let waterGlassCount = 0;
-
+ 
 function addWaterGlass() {
   waterGlassCount = waterGlassCount + 1;
+
+  const waterGlasses = document.querySelector("#waterGlasses strong");
+
+  if (waterGlasses) {
+    waterGlasses.textContent = waterGlassCount + " bicchieri";
+  }
+}
+function removeWaterGlass() {
+  if (waterGlassCount > 0) {
+    waterGlassCount = waterGlassCount - 1;
+  }
 
   const waterGlasses = document.querySelector("#waterGlasses strong");
 
